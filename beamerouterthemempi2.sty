@@ -1,0 +1,46 @@
+\mode<presentation>
+
+% Frame title
+
+
+\defbeamertemplate*{frametitle}{mpi2}{
+  \ifx \insertframetitle \empty
+  {}
+  \else
+  {
+  \begin{tikzpicture}[remember picture, overlay]
+  %\useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,1.5);
+    \node[inner sep=0pt, anchor=north west, text width= {\paperwidth - 2*\framehsep}] (frtitletext) at
+    ($(current page.north west) + (\framehsep, -\framevsep)$){{\usebeamerfont{frametitle}\usebeamercolor{frametitle}\insertframetitle}};
+    \ifx\insertframesubtitle\empty
+      {}
+      \else
+      {%
+        \node[inner sep=0pt,MPG_green,
+        below left = 1.5mm and 0 mm of frtitletext, anchor=north west] (subtitletext) {
+          {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{frametitle}\insertframesubtitle}};
+      }%
+    \fi
+  \end{tikzpicture}
+  \vspace*{4mm}
+}
+\fi
+}
+
+\defbeamertemplate*{footline}{my footline}
+{
+    \ifnum \insertpagenumber=1
+    \else
+      \begin{tikzpicture}[remember picture, overlay]
+              %\node [rectangle, shading=axis,left color=white, right color=MPG_green, anchor=south east, minimum width=0.75\paperwidth, minimum %height=9.2mm] (footbox) at (current page.south east){};
+              % \node[inner sep=0pt,anchor=south east,yshift=\framevsep,xshift=-\framehsep] (logo) at (current page.south east)
+	      %   {\includegraphics[height=7mm]{logo_notext.pdf}};
+              \node[inner sep=0pt,anchor=south west, yshift=\framehsep, xshift=\framevsep] (footertext) at (current page.south west)%
+              {\small\insertframenumber};
+      \end{tikzpicture}
+      \fi
+}
+
+
+
+\mode<all>

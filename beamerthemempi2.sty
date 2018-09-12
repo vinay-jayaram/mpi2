@@ -1,0 +1,74 @@
+\mode<presentation>
+
+% Requirement
+\RequirePackage{tikz}
+\usepackage{environ}
+
+\newlength\framehsep
+\setlength{\framehsep}{4mm}
+\newlength\framevsep
+\setlength{\framevsep}{4mm}
+
+% Settings
+\usecolortheme{mpi2}
+\useinnertheme{mpi2}
+\useoutertheme{mpi2}
+\usefonttheme{mpi2}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=true] 
+\setbeamersize{text margin left=20mm, text margin right=20mm}
+\setbeamertemplate{itemize items}{$\blacksquare$}
+% \setbeamertemplate{enumerate items}[square]
+\setbeamercolor{item projected}{bg=MPG_green,fg=white}
+\setbeamertemplate{enumerate items}{%
+  \usebeamercolor[bg]{item projected}%
+  \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\normalsize\bfseries\insertenumlabel}}%
+}
+\mode<all>
+
+\tikzstyle{greynode}=[opacity=0.7, inner xsep=\framehsep, inner ysep=\framevsep, text=MPG_green, text opacity=1, fill=MPG_grey, align=center]
+
+\NewEnviron{imframe}[2][]{%
+  {
+    \setbeamertemplate{background}{
+      \parbox[c][\paperheight]{\paperwidth}{
+        \includegraphics[width=\paperwidth,height=\paperheight]{#2}
+      }
+    }
+    \setbeamertemplate{footline}{}
+    \setbeamertemplate{frametitle}
+    {
+      \begin{tikzpicture}[remember picture, overlay]
+        % \useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,1.5);
+        \usebeamercolor{title}
+        \node[inner xsep=\framehsep, inner ysep=\framevsep, fill=bg, text=fg,
+        anchor=north west] at
+        (current page.north west)
+        {{\usebeamerfont{frametitle}\usebeamercolor{title}\insertframetitle}};
+      \end{tikzpicture}
+      \vskip5mm
+    }
+    \begin{frame}{#1}
+      \BODY
+    \end{frame}
+  }
+}
+
+
+\NewEnviron{solidframe}[1][]{%
+{
+  \setbeamercolor*{background canvas}{bg=MPG_green}
+\setbeamercolor*{normal text}{fg=white}
+\usebeamercolor[fg]{normal text}
+\setbeamercolor*{alerted text}{fg=MPG_orange}
+\setbeamerfont{alerted text}{series=\bfseries}
+\setbeamercolor*{example text}{fg=MPG_green,bg=MPG_grey!70}
+\setbeamercolor*{page number in head/foot}{fg=white}
+\setbeamercolor*{frametitle}{fg=white}
+\usebeamercolor[fg]{frametitle}
+\begin{frame}{#1}
+\BODY
+\end{frame}
+}
+}

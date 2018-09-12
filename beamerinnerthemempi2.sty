@@ -1,0 +1,57 @@
+\mode<presentation>
+\usepackage{shapepar}
+\usetikzlibrary{positioning,calc,backgrounds,intersections,fit}
+\usepackage{pgfkeys}
+
+% Title page 
+% TODO: allow multiple styles (bottom, side)
+% args: h offset, image location
+\defbeamertemplate*{title page}{mpi2}[2][0mm]
+{ 
+  \begin{tikzpicture}[remember picture, overlay]
+    \def\leftmargin{(current page.south west) to
+      (current page.north west)}
+    \def\rightmargin{($(current page.north) + (10mm,0mm)$)
+      to ($(current page.south west) + (\framehsep * 2 + 20mm,0mm)$)}
+    \def\datefont{\usebeamerfont{date}}
+    \usebeamercolor{date}
+    \def\authorfont{\usebeamerfont{author}}
+    \def\titlefont{\usebeamerfont{title}}
+
+    \node[inner sep=0pt,anchor=center, xshift=#1] (picture) at (current page.center)
+      {\includegraphics[height=\paperheight, width=\paperwidth]{#2}};
+      \fill[color=MPG_green] (current page.south west) -- (current page.north west) -- \rightmargin -- cycle;
+
+      \node[inner sep=0pt,anchor=south west,
+      yshift=\framevsep,xshift=\framehsep] (titlelogo) at (current page.south west) {\includegraphics[height=15mm]{logo_white.pdf}};
+
+    \node[inner sep=0pt,
+    above left= 2mm and 0mm of titlelogo,
+    font=\datefont,
+    anchor=south west,
+    text=fg] (date) {\insertdate};
+
+
+    \node[inner sep=0pt,anchor=north west, yshift=-\framevsep,
+    xshift=\framehsep] (title) at (current page.north west)
+    {\begin{beamercolorbox}{maintitle}
+        \usebeamerfont{title}\inserttitle%
+     \end{beamercolorbox}
+    };
+
+    \node[inner sep=0pt, anchor=north west, xshift=\framehsep,
+    font=\authorfont,
+    text=white] (author) at (current page.west)
+    {\insertauthor
+    };
+
+    \node[inner sep=0pt, below left=2mm and 0mm of author, anchor=north west, ] ()
+    { \begin{beamercolorbox}{institute}
+        \usebeamercolor[fg]{author}\usebeamerfont{institute}\insertinstitute%
+     \end{beamercolorbox}
+    };
+  \end{tikzpicture}
+}
+
+\mode
+<all>

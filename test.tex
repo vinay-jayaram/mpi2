@@ -1,0 +1,52 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{colortbl}
+\title{A short poem by \\Catullus}
+\date{\today}
+\author[]{Catullus}
+\institute{Max Planck Institute for \\Intelligent Systems}
+
+\usetheme{mpi2}
+
+\begin{document}
+\setbeamertemplate{title page}[mpi2][0cm]{logo_notext.pdf}
+\begin{frame}
+\titlepage
+\end{frame}
+\begin{frame}
+  \frametitle{This is a title}
+  \framesubtitle{This is a subtitle}
+  %greynode is a set of parameters I defined in the style
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[greynode, anchor=center, font=\large, text width=8cm] at (current page.center)%
+    {Odi et amo. \\ quare id faciam, fortasse requiris. \\ 
+nescio, sed fieri sentio et excrucior};
+\end{tikzpicture}
+This is normal text
+\begin{itemize}
+\item This is an item
+\item This is item 2
+\end{itemize}
+\begin{enumerate}
+\item 1
+\item 2
+\end{enumerate}
+\end{frame}
+
+\begin{imframe}{logo_notext.pdf}
+  \frametitle{This is imframe}
+\end{imframe}
+
+\begin{solidframe}
+  \frametitle{Test title}
+  test text
+  \alert{test}
+\end{solidframe}
+% you have to run latex twice for things to orient properly
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
